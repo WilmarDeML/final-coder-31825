@@ -6,15 +6,15 @@ routerCarrito.post('/', (req, res) => {
     res.send({funcion: 'Creará un producto y devuelve su id'})
 })
 
-routerCarrito.post('/:idCarrito/products', (req, res) => {
+routerCarrito.post('/:idCarrito/productos', (req, res) => {
     res.send({funcion: 'Incorporará carritos al carrito, enviando id del producto en el body'})
 })
 
-routerCarrito.get('/:id/products', (req, res) => {
+routerCarrito.get('/:id/productos', (req, res) => {
     res.send({funcion: 'Listará los productos guardados en el carrito'})
 })
 
-routerCarrito.delete('/:idCarrito/products/:idProd', (req, res) => {
+routerCarrito.delete('/:idCarrito/productos/:idProd', (req, res) => {
     res.send({funcion: 'Eliminará un producto por id de carrito y de producto'})
 })
 
