@@ -5,6 +5,10 @@ import routerProductos from "./routers/routerProductos.js"
 const app = express()
 
 app.use('/api/productos', routerProductos)
-app.use('/api/carrito', routerCarrito)
+app.use('/api/carritos', routerCarrito)
+
+app.use('*', (req, res) => res.status(404).send({
+    error: -2, descripcion: `Ruta ${req.baseUrl}, Método ${req.method} no implementada`
+}))
 
 export default app
