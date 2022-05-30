@@ -1,0 +1,25 @@
+{
+  "type": "module",
+  "name": "proyecto-final",
+  "version": "1.0.0",
+  "description": "Proyecto Ecommerce comisión 31825",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilmarDeML/final-coder-31825.git"
+  },
+  "author": "Wilmar De MelquisedecLisbet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WilmarDeML/final-coder-31825/issues"
+  },
+  "homepage": "https://github.com/WilmarDeML/final-coder-31825#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
