@@ -12,8 +12,6 @@ const esAdmin = (req, res, next) => {
     })
 }
 
-routerProductos.use(express.json())
-
 routerProductos.get("/", async (req, res) => {
     res.send(await contenedorProductos.getAll())
 })

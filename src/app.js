@@ -4,6 +4,8 @@ import routerProductos from "./routers/routerProductos.js"
 
 const app = express()
 
+app.use(express.json());
+
 app.use('/api/productos', routerProductos)
 app.use('/api/carritos', routerCarrito)
 
