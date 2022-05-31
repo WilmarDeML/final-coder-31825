@@ -1,4 +1,7 @@
 import express from "express"
+import ContenedorArchivo from "../containers/ContenedorArchivo.js"
+
+const contenedorProductos = new ContenedorArchivo('productos')
 
 const routerProductos = express.Router()
 
@@ -9,24 +12,26 @@ const esAdmin = (req, res, next) => {
     })
 }
 
-routerProductos.get("/", (req, res) => {
-    res.send({funcion: 'Listará todos los productos disponibles'})
+routerProductos.use(express.json())
+
+routerProductos.get("/", async (req, res) => {
+    res.send(await contenedorProductos.getAll())
 })
 
-routerProductos.get("/:id", (req, res) => {
-    res.send({funcion: 'Listará un producto por su id'})
+routerProductos.get("/:id", async (req, res) => {
+    res.send(await contenedorProductos.getById(req.params.id))
 })
 
-routerProductos.post("/", esAdmin, (req, res) => {
-    res.send({funcion: 'Incorporará productos al listado', ojo: 'Sólo admin'})
+routerProductos.post("/", esAdmin, async (req, res) => {
+    res.send(await contenedorProductos.save(req.body))
 })
 
-routerProductos.put("/:id", esAdmin, (req, res) => {
-    res.send({funcion: 'Actualizará un producto por su id', ojo: 'Sólo admin'})
+routerProductos.put("/:id", esAdmin, async (req, res) => {
+    res.send(await contenedorProductos.update(req.params.id, req.body))
 })
 
-routerProductos.delete("/:id", esAdmin, (req, res) => {
-    res.send({funcion: 'Borrará un producto por su id', ojo: 'Sólo admin'})
+routerProductos.delete("/:id", esAdmin, async (req, res) => {
+    res.send(await contenedorProductos.deleteById(req.params.id))
 })
 
 export default routerProductos
