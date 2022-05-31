@@ -7,21 +7,21 @@ export default class ContenedorArchivo {
 
     save = async objeto => {
         const objetos = await this.getAll()        
-        const objetoExiste = objetos.find(obj => obj.id === objeto.id)
+        const objetoExiste = objetos?.find(obj => obj.id === objeto.id)
         if(objetoExiste){
             const error = new Error(`Objeto con id ${id} ya se encuentra en base de datos`)
             error.tipo = 304
             throw error
         } 
-        const objetoConId =  { id: Date.now().toString(), ...objeto }
-        objetos.unshift(objetoConId)
+        objeto =  { id: Date.now().toString(), ...objeto }
+        objetos.unshift(objeto)
         await this.tryWrite(objetos, 'Error al guardar')
-        return objetoConId
+        return { id: objeto.id }
     }
 
     getById = async id => {
         const objetos = await this.getAll()
-        const objetoBuscado = objetos.find(objeto => objeto.id === id)
+        const objetoBuscado = objetos?.find(objeto => objeto.id === id)
         if (!objetoBuscado) {
             const error = new Error(`Objeto con id ${id} no se encuentra en base de datos`)
             error.tipo = 404
@@ -42,7 +42,7 @@ export default class ContenedorArchivo {
 
     update = async (id, objeto) => {
         const objetos = await this.getAll()
-        const indiceBuscado = objetos.findIndex(p => p.id === id)
+        const indiceBuscado = objetos?.findIndex(p => p.id === id)
         if (indiceBuscado < 0) {
             const error = new Error(`Objeto con id ${id} no se encuentra en base de datos`)
             error.tipo = 404
@@ -55,7 +55,7 @@ export default class ContenedorArchivo {
 
     deleteById = async id => {
         const objetos = await this.getAll()
-        const objetoBuscado = objetos.find(objeto => objeto.id === id)
+        const objetoBuscado = objetos?.find(objeto => objeto.id === id)
         if (!objetoBuscado) {
             const error = new Error(`Objeto con id ${id} no se encuentra en base de datos`)
             error.tipo = 404
