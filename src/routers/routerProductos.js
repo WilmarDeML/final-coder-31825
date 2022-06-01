@@ -1,35 +1,17 @@
 import express from "express"
-import ContenedorArchivo from "../containers/ContenedorArchivo.js"
-
-const contenedorProductos = new ContenedorArchivo('productos')
+import ctrlApiProductos from "../controllers/ctrlApiProductos.js"
+import esAdmin from "../controllers/ctrlEsAdmin.js"
 
 const routerProductos = express.Router()
 
-const esAdmin = (req, res, next) => {
-    req.query.admin > 0 ? next() : res.status(401).send({
-        error: -1,
-        descripcion: `Ruta ${req.baseUrl}, Método ${req.method} no autorizado`
-    })
-}
+routerProductos.get("/", ctrlApiProductos.obtenerProductos)
 
-routerProductos.get("/", async (req, res) => {
-    res.send(await contenedorProductos.getAll())
-})
+routerProductos.get("/:id", ctrlApiProductos.obtenerProductoPorId)
 
-routerProductos.get("/:id", async (req, res) => {
-    res.send(await contenedorProductos.getById(req.params.id))
-})
+routerProductos.post("/", esAdmin, ctrlApiProductos.guardarProducto)
 
-routerProductos.post("/", esAdmin, async (req, res) => {
-    res.send(await contenedorProductos.save(req.body))
-})
+routerProductos.put("/:id", esAdmin, ctrlApiProductos.actualizarProducto)
 
-routerProductos.put("/:id", esAdmin, async (req, res) => {
-    res.send(await contenedorProductos.update(req.params.id, req.body))
-})
-
-routerProductos.delete("/:id", esAdmin, async (req, res) => {
-    res.send(await contenedorProductos.deleteById(req.params.id))
-})
+routerProductos.delete("/:id", esAdmin, ctrlApiProductos.olvidarProducto)
 
 export default routerProductos
