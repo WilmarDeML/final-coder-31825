@@ -2,14 +2,13 @@ import fs from 'fs/promises'
 
 export default class ContenedorArchivo {
     constructor(nombreArchivo){
-        this.ruta = `./src/api/${nombreArchivo}.json`
+        this.ruta = `./src/db/${nombreArchivo}.json`
     }
 
     save = async objeto => {
         const objetos = await this.getAll()        
         const objetoExiste = objetos?.find(obj => obj.id === objeto.id)
         if(objetoExiste){
-            const error = new Error(`Objeto con id ${id} ya se encuentra en base de datos`)
             error.tipo = 304
             throw error
         } 

@@ -1,6 +1,6 @@
 import express from "express"
-import routerCarrito from "./routers/routerCarrito.js"
-import routerProductos from "./routers/routerProductos.js"
+import routerCarrito from './routes/routers/routerCarrito.js'
+import routerProductos from './routes/routers/routerProductos.js'
 
 const app = express()
 
